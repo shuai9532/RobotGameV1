@@ -20,6 +20,7 @@ public class Main {
         + "Actions: M,M,M,L,M,R,R,R");
 
     SetUp start = new SetUp();
+    ActionProcess processor = new ActionProcess(new Border(), new RobotState(), new Actions());
+    processor.processAction();
   }
-
 }

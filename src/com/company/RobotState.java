@@ -5,14 +5,14 @@ package com.company;
  */
 public class RobotState {
 
-  String location = SetUp.location;
-  String direction = SetUp.direction;
+  private static int[] location = SetUp.location;
+  private static String direction = SetUp.direction;
 
-  public void setLocation(String location) {
+  public void setLocation(int[] location) {
     this.location = location;
   }
 
-  public String getLocation() {
+  public int[] getLocation() {
     return location;
   }
 
