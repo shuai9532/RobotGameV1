@@ -19,7 +19,7 @@ public class RobotGameInputParser {
   private int[] convertLocation(String location){
 
     if(location.equals("") || location == null || location.length() < 5) return null;
-    if(!(location.indexOf(0) == '[' && location.indexOf(location.length()-1) == ']')) return null;
+    if(!(location.charAt(0) == '[' && location.charAt(location.length()-1) == ']')) return null;
 
     int[] arr = new int[2];
     String subString = location.substring(1,location.length()-1);
