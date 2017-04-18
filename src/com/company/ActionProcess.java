@@ -1,88 +1,90 @@
 package com.company;
 
+import com.company.RobotState.Direction;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by shuai9532 on 4/16/17.
  */
 public class ActionProcess {
 
+  char[] actionArray;
   RobotState currentState;
-  char[] actionList;
+  Border border;
 
-  public ActionProcess(Border border, RobotState currentState, Actions action){
+  public ActionProcess(RobotState currentState, Border border, List<Action> action){
+
     this.currentState = currentState;
-    String actions = action.getActions();
-    this.actionList = actions.toCharArray();
+    this.border = border;
 
   }
+
   public void processAction(){
-    for(int i = 0; i < this.actionList.length; i++) {
-      actionProcessor(this.currentState,this.actionList[i]);
+    for(int i = 0; i < this.actionArray.length; i++) {
+      actionProcessor(this.actionArray[i]);
     }
+    System.out.println(
+        String.format("the final location: [%s,%s]", currentState.getX(),currentState.getY()));
+    System.out.println("the direction faced: "+ currentState.getDirection());
   }
-  private void actionProcessor(RobotState currentState, char movement) {
+  private void actionProcessor( char movement) {
 
     switch (movement) {
       case 'M':
         //if not in boundary:
-        if(!moveSuccess(currentState)){
+        if(!moveSuccess()){
           System.out.println("the robot at the boundary");
-          System.out.println("the current location: " + Arrays.toString(currentState.getLocation()));
+          System.out.println(
+              String.format("the current location:[%s,%s]", currentState.getX(),currentState.getY()));
           System.out.println("the direction faced: "+ currentState.getDirection());
         }
 
       case 'L':
         switch (currentState.getDirection()) {
-          case "N": currentState.setDirection("W"); // change current dir to W
-          case "S": currentState.setDirection("E"); // change current dir to E
-          case "E": currentState.setDirection("N"); // change current dir to N
-          case "W": currentState.setDirection("S"); // change current dir to S
+          case N: currentState.setDirection(Direction.W); break; // change current dir to W
+          case E: currentState.setDirection(Direction.E); break; // change current dir to E
+          case S: currentState.setDirection(Direction.N); break; // change current dir to N
+          case W: currentState.setDirection(Direction.S); break; // change current dir to S
         }
 
       case 'R':
         switch (currentState.getDirection()) {
-          case "N": currentState.setDirection("E"); // change current dir to E
-          case "S": currentState.setDirection("W"); // change current dir to W
-          case "E": currentState.setDirection("S"); // change current dir to S
-          case "W": currentState.setDirection("N"); // change current dir to N
+          case N: currentState.setDirection(Direction.E); break;// change current dir to E
+          case S: currentState.setDirection(Direction.W); break;// change current dir to W
+          case E: currentState.setDirection(Direction.S); break;// change current dir to S
+          case W: currentState.setDirection(Direction.N); break;// change current dir to N
         }
     }
 
   }
 
-  private boolean moveSuccess(RobotState currentState) {
+  private boolean moveSuccess() {
     //get current location
-    int[] currentLocation = currentState.getLocation();
     //need to do teh update of the location is success
-
     switch (currentState.getDirection()) {
-      case "S":
+      case S:
         // check if if it is in bound after +1, and then
-        if(currentLocation[1] >= 2){
-          currentLocation[1] = currentLocation[1] - 1;
-          currentState.setLocation(currentLocation);
+        if(currentState.getY() >= 2){
+          currentState.setY(currentState.getY() - 1);
         }
         return false;
-      case "N":
+      case N:
         // check if if it is in bound after +1
-        if(currentLocation[1] >= 7){
-          currentLocation[1] = currentLocation[1] + 1;
-          currentState.setLocation(currentLocation);
+        if(currentState.getY() <= Border.BORDER[0].length - 1){
+          currentState.setY(currentState.getY() + 1);
         }
         return false;
-      case "E":
+      case E:
         // check if if it is in bound after +1
-        if(currentLocation[0] >= 7){
-          currentLocation[1] = currentLocation[0] + 1;
-          currentState.setLocation(currentLocation);
+        if(currentState.getX() <= Border.BORDER[0].length - 1){
+          currentState.setX(currentState.getX() + 1);
         }
         return false;
-      case "W":
+      case W:
         // check if if it is in bound after +1
-        if(currentLocation[0] >= 2){
-          currentLocation[1] = currentLocation[0] - 1;
-          currentState.setLocation(currentLocation);
+        if(currentState.getX() >= 2){
+          currentState.setX(currentState.getX() - 1);
         }
         return false;
     }
