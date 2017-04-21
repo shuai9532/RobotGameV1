@@ -9,9 +9,9 @@ import java.util.List;
  */
 public class ActionProcess {
 
-  char[] actionArray;
-  RobotState currentState;
-  Border border;
+  private char[] actionArray;
+  private RobotState currentState;
+  private Border border;
 
   public ActionProcess(RobotState currentState, Border border, List<Action> action){
 
@@ -28,6 +28,7 @@ public class ActionProcess {
         String.format("the final location: [%s,%s]", currentState.getX(),currentState.getY()));
     System.out.println("the direction faced: "+ currentState.getDirection());
   }
+
   private void actionProcessor( char movement) {
 
     switch (movement) {

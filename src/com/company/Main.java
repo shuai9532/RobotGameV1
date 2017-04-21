@@ -23,24 +23,25 @@ public class Main {
         + "Actions: M,M,M,L,M,R,R,R");
 
     RobotGameInputParser parser = new RobotGameInputParser();
-    int[] location = parser.readInitialLocation();
+
+    int[] location = parser.readInitialLocation(System.in);
     while(location == null){
       System.err.println("the input location is not valid.");
       System.err.println("the location is composed of x and y; start with [ and end with ] \n"
           + "sample input :[2,3]");
       System.err.println("Please re-input:");
-      location = parser.readInitialLocation();
+      location = parser.readInitialLocation(System.in);
     }
 
-    Direction direction = parser.readInitialDirection();
+    Direction direction = parser.readInitialDirection(System.in);
     while(direction == null){
       System.err.println("the input direction is not valid.");
       System.err.println("direction faced: W, S, N, E");
       System.err.println("Please re-input:");
-      direction = parser.readInitialDirection();
+      direction = parser.readInitialDirection(System.in);
     }
 
-    List<Action> actions = parser.readActions();
+    List<Action> actions = parser.readActions(System.in);
     while(actions == null){
       System.err.println("the input actions contain invalid step or teh formatt is wrong.");
       System.err.println("the actions are limited to:\n"
@@ -49,7 +50,7 @@ public class Main {
           + "R: Turn right\n");
       System.err.println("The formatt is : M,M,M,L,M,R,R,R");
       System.err.println("Please re-input: ");
-      actions = parser.readActions();
+      actions = parser.readActions(System.in);
     }
 
     ActionProcess processor = new ActionProcess(
