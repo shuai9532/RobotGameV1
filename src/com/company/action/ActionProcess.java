@@ -1,6 +1,9 @@
-package com.company;
+package com.company.action;
 
-import com.company.RobotState.Direction;
+import com.company.data.*;
+import com.company.data.RobotState.Direction;
+import com.company.data.Action;
+import com.company.data.Border;
 import java.util.List;
 
 /**
@@ -10,20 +13,19 @@ public class ActionProcess {
 
   private List<Action> actionArray;
   private RobotState currentState;
-  private Border border;
 
-  public ActionProcess(RobotState currentState, Border border, List<Action> action){
+  public ActionProcess(RobotState currentState, List<Action> action){
 
     this.currentState = currentState;
-    this.border = border;
     actionArray = action;
-
   }
 
   public void processAction(){
     for(int i = 0; i < this.actionArray.size(); i++) {
-      System.out.println("current location:"+ "["+ currentState.getX() +", "+ currentState.getY()+"]");
+      System.out.println("current location: " + "["+ currentState.getX() +", "+ currentState.getY()+"]");
+      System.out.println("current direction: " + currentState.getDirection());
       System.out.println("current movement:"+ this.actionArray.get(i).getAction());
+      System.out.println("");
       actionProcessor(this.actionArray.get(i).getAction());
     }
     System.out.println(
@@ -77,8 +79,6 @@ public class ActionProcess {
         break;
       case N:
         // check if if it is in bound after +1
-        System.out.println("y : "+ currentState.getY());
-        System.out.println("border length:"+ Border.BORDER.length);
         if(currentState.getY() <= Border.BORDER.length - 1){
           currentState.setY(currentState.getY() + 1);
           return true;
@@ -93,7 +93,6 @@ public class ActionProcess {
         break;
       case W:
         // check if if it is in bound after +1
-        System.out.println("current x:"+ currentState.getX());
         if(currentState.getX() >= 2){
           currentState.setX(currentState.getX() - 1);
           return true;

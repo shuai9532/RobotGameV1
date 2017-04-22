@@ -1,4 +1,4 @@
-package com.company;
+package com.company.data;
 
 
 import java.util.Dictionary;
@@ -15,12 +15,11 @@ public class RobotState {
   private Direction direction;
 
   public RobotState(int X_axis, int Y_axis, Direction direction){
+
     location[0] = X_axis;
     location[1] = Y_axis;
-    if( direction == Direction.E ||
-        direction == Direction.W ||
-        direction == Direction.S ||
-        direction == Direction.N )
+    if( direction == Direction.E || direction == Direction.W ||
+        direction == Direction.S || direction == Direction.N )
       this.direction = direction;
   }
 

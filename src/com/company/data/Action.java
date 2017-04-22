@@ -1,4 +1,4 @@
-package com.company;
+package com.company.data;
 
 /**
  * Created by shuai9532 on 4/16/17.

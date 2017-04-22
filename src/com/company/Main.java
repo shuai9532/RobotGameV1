@@ -1,6 +1,10 @@
 package com.company;
 
-import com.company.RobotState.Direction;
+import com.company.action.ActionProcess;
+import com.company.action.RobotGameInputParser;
+import com.company.data.RobotState;
+import com.company.data.RobotState.Direction;
+import com.company.data.Action;
 import java.util.List;
 
 public class Main {
@@ -54,9 +58,7 @@ public class Main {
     }
 
     ActionProcess processor = new ActionProcess(
-        new RobotState(location[0],location[1],direction),
-        new Border(), actions);
-
+        new RobotState(location[0], location[1],direction), actions);
     processor.processAction();
   }
 }

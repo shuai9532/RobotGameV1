@@ -1,11 +1,10 @@
-package com.company;
+package com.company.action;
 
-import com.company.RobotState.Direction;
+import com.company.data.RobotState.Direction;
+import com.company.data.Action;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 /**
  * Created by shuai9532 on 4/16/17.
@@ -27,7 +26,6 @@ public class RobotGameInputParser {
   }
 
   private int[] convertLocation(String location){
-
 
     if(location.equals("") || location == null || location.length() < 5) return null;
     if(!(location.charAt(0) == '[' && location.charAt(location.length()-1) == ']')) return null;
@@ -54,6 +52,7 @@ public class RobotGameInputParser {
     Scanner in = new Scanner(stream);
     in.useDelimiter("\n");
     System.out.println("Direction faced:");
+
     if(in.hasNext()) {
       switch (in.next().trim()) {
         case "N":
@@ -74,13 +73,12 @@ public class RobotGameInputParser {
   public List<Action> readActions(InputStream stream){
     Scanner in = new Scanner(stream);
     List<Action> actions = new ArrayList<>();
-    System.out.println("Actions:");
     in.useDelimiter("\n");
+    System.out.println("Actions:");
 
     if(!in.hasNext()){
       return actions;
     }
-
     String[] actions_string = in.next().split(",");
     for(String action : actions_string){
       String trimmedAction = action.trim();
