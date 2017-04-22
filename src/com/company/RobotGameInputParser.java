@@ -15,16 +15,14 @@ public class RobotGameInputParser {
 
   public int[] readInitialLocation(InputStream stream){
     Scanner in = new Scanner(stream);
-    in.useDelimiter("^…$");
+    in.useDelimiter("\n");
     System.out.println("Location:");
 
     if(in.hasNext()) {
       String loc = in.next();
       int[] result = convertLocation(loc);
-      in.close();
       return result;
     }
-    in.close();
     return null;
   }
 
@@ -54,7 +52,7 @@ public class RobotGameInputParser {
 
   public Direction readInitialDirection(InputStream stream) {
     Scanner in = new Scanner(stream);
-    in.useDelimiter("^…$");
+    in.useDelimiter("\n");
     System.out.println("Direction faced:");
     if(in.hasNext()) {
       switch (in.next().trim()) {
@@ -67,11 +65,9 @@ public class RobotGameInputParser {
         case "W":
           return Direction.W;
         default:
-          in.close();
           return null;
       }
     }
-    in.close();
     return null;
   }
 
@@ -79,10 +75,9 @@ public class RobotGameInputParser {
     Scanner in = new Scanner(stream);
     List<Action> actions = new ArrayList<>();
     System.out.println("Actions:");
-    in.useDelimiter("^…$");
+    in.useDelimiter("\n");
 
     if(!in.hasNext()){
-      in.close();
       return actions;
     }
 
@@ -90,12 +85,10 @@ public class RobotGameInputParser {
     for(String action : actions_string){
       String trimmedAction = action.trim();
       if(!(trimmedAction.equals("M") || trimmedAction.equals("L")|| trimmedAction.equals("R"))){
-        in.close();
         return null;
       }
       actions.add(new Action(trimmedAction));
     }
-    in.close();
     return actions;
   }
 
