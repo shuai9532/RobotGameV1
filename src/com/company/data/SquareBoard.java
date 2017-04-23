@@ -5,10 +5,10 @@ package com.company.data;
  */
 public class SquareBoard implements Board {
 
-  public static int[][] BOARD;
+  public static int[][] board;
 
   public SquareBoard(int size){
-    BOARD =  new int[size][size];
+    board =  new int[size][size];
   }
 
   /**
@@ -19,6 +19,6 @@ public class SquareBoard implements Board {
    */
   @Override
   public boolean canMoveToPosition(int x, int y) {
-    return (x <= BOARD[0].length && x >= 1 && y <= BOARD.length && y >= 1);
+    return (x <= board[0].length && x >= 1 && y <= board.length && y >= 1);
   }
 }

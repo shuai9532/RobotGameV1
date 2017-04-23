@@ -23,12 +23,12 @@ public class TurnLeft implements Action {
         currentState.setDirection(Direction.W);
         break;
       case E:
-        // change current dir to E
-        currentState.setDirection(Direction.E);
-        break;
-      case S:
         // change current dir to N
         currentState.setDirection(Direction.N);
+        break;
+      case S:
+        // change current dir to E
+        currentState.setDirection(Direction.E);
         break;
       case W:
         // change current dir to S

@@ -26,17 +26,24 @@ public class Main {
         + "Direction faced: N\n"
         + "Actions: M,M,M,L,M,R,R,R");
 
+    SquareBoard board =  new SquareBoard(8);
     RobotGameInputParser parser = new RobotGameInputParser();
     // Receive location
+    System.out.println("Location:");
     int[] location = parser.readInitialLocation(System.in);
-    while (location == null) {
+    while (location == null || ((location[0] > board.board[0].length
+           || location[0] < 1) && (location[1] > board.board.length
+           || location[1] < 1)))
+    {
       System.err.println("the input location is not valid.");
       System.err.println("the location is composed of x and y; start with [ and end with ] \n"
+          + "the range for x and y is 1 to 8\n"
           + "sample input :[2,3]");
       System.err.println("Please re-input:");
       location = parser.readInitialLocation(System.in);
     }
     // Receive direction
+    System.out.println("Direction faced:");
     Direction direction = parser.readInitialDirection(System.in);
     while (direction == null) {
       System.err.println("the input direction is not valid.");
@@ -46,21 +53,22 @@ public class Main {
     }
     RobotState state = new RobotState(location[0], location[1], direction);
     // Receive a list of actions
+    System.out.println("Actions:");
     List<Action> actions = parser.readActions(System.in);
     while (actions == null) {
-      System.err.println("the input actions contain invalid step or teh formatt is wrong.");
+      System.err.println("the input actions contain invalid step or the inout form is wrong.");
       System.err.println("the actions are limited to:\n"
           + "M: Move 1 square forward\n"
           + "L: Turn left\n"
-          + "R: Turn right\n");
-      System.err.println("The formatt is : M,M,M,L,M,R,R,R");
+          + "R: Turn right");
+      System.err.println("The format is : M,M,M,L,M,R,R,R");
       System.err.println("Please re-input: ");
       actions = parser.readActions(System.in);
     }
     // Process actions
     boolean endNormally = true;
     for (Action action : actions) {
-      if (!action.execute(state, new SquareBoard(8))) {
+      if (!action.execute(state,board)) {
         System.out.println("The robot reaches the boundary");
         System.out.println(
             String.format("The final location:[%s,%s]", state.getX(), state.getY()));

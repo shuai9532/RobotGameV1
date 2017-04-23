@@ -18,10 +18,9 @@ public class RobotGameInputParser {
    * @return 2-D array where x at index 0 and y at index 1
    */
   public int[] readInitialLocation(InputStream stream){
+
     Scanner in = new Scanner(stream);
     in.useDelimiter("\n");
-    System.out.println("Location:");
-
     if(in.hasNext()) {
       String loc = in.next();
       return convertLocation(loc);
@@ -65,10 +64,9 @@ public class RobotGameInputParser {
    * @return Direction
    */
   public Direction readInitialDirection(InputStream stream) {
+
     Scanner in = new Scanner(stream);
     in.useDelimiter("\n");
-    System.out.println("Direction faced:");
-
     if(in.hasNext()) {
       switch (in.next().trim()) {
         case "N":
@@ -92,13 +90,11 @@ public class RobotGameInputParser {
    * @return A list that contains action objects
    */
   public List<Action> readActions(InputStream stream){
+
     Scanner in = new Scanner(stream);
     List<Action> actions = new ArrayList<>();
     ActionFactory factory = new ActionFactory();
-
     in.useDelimiter("\n");
-    System.out.println("Actions:");
-
     if(!in.hasNext()){
       return actions;
     }
