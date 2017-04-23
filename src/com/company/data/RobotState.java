@@ -7,7 +7,6 @@ package com.company;
 public class RobotState {
 
   public enum Direction{E, W, N, S}
-
   private int[] location = new int[2];
   private Direction direction;
 
