@@ -1,12 +1,19 @@
-package com.company;
+package com.company.action;
 
-import com.company.RobotState.Direction;
-
+import com.company.data.SquareBoard;
+import com.company.data.RobotState;
+import com.company.data.RobotState.Direction;
 /**
  * Created by shuai9532 on 4/22/17.
  */
-public class TurnLeft implements Action{
+public class TurnLeft implements Action {
 
+  /**
+   * Make robot turn left
+   * @param currentState Current location and direction of the robot
+   * @param board The board that robot is moving
+   * @return True if the robot makes a turn
+   */
   @Override
   public boolean execute(RobotState currentState, SquareBoard board) {
 

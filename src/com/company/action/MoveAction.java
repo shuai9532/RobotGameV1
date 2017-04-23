@@ -1,10 +1,18 @@
-package com.company;
+package com.company.action;
 
+import com.company.data.SquareBoard;
+import com.company.data.RobotState;
 /**
  * Created by shuai9532 on 4/22/17.
  */
-public class MoveAction implements Action{
+public class MoveAction implements Action {
 
+  /**
+   * Move the robot one step further
+   * @param currentState Current location and direction of the robot
+   * @param board The board that robot is moving
+   * @return True if the robot makes a move
+   */
   @Override
   public boolean execute(RobotState currentState, SquareBoard board) {
 
