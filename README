@@ -1,0 +1,16 @@
+Robot Game ( the first version listed in email)
+================================================================
+Author: Shuai Huang
+E-mail: shh176@ucsd.edu
+Date: 4.22.2017
+
+Description
+-----------
+The program is a robot game where an user is asked to initialize
+the starting location and face direction a robot has and then make
+a list of actions to make the robot move on a 8x8 board. When the
+robot reaches the boundary of the board, user will be informed that
+the movement is stopped as the robot cannot move further, and the 
+final location is outputed; else, if the movement is executed 
+successfully, then the final lcoation will be shown.
+
