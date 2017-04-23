@@ -1,7 +1,6 @@
-package com.company.action;
+package com.company;
 
-import com.company.data.RobotState.Direction;
-import com.company.data.Action;
+import com.company.RobotState.Direction;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +72,8 @@ public class RobotGameInputParser {
   public List<Action> readActions(InputStream stream){
     Scanner in = new Scanner(stream);
     List<Action> actions = new ArrayList<>();
+    ActionFactory factory = new ActionFactory();
+
     in.useDelimiter("\n");
     System.out.println("Actions:");
 
@@ -85,7 +86,8 @@ public class RobotGameInputParser {
       if(!(trimmedAction.equals("M") || trimmedAction.equals("L")|| trimmedAction.equals("R"))){
         return null;
       }
-      actions.add(new Action(trimmedAction));
+      System.out.println("Action: "+ trimmedAction);
+      actions.add(factory.createAction(trimmedAction));
     }
     return actions;
   }

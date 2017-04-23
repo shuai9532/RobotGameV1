@@ -4,8 +4,8 @@ package com.company.test;
  * Created by shuai9532 on 4/17/17.
  */
 
-import com.company.data.RobotState;
-import com.company.data.RobotState.Direction;
+import com.company.RobotState;
+import com.company.RobotState.Direction;
 import org.junit.*;
 import static org.junit.Assert.assertEquals;
 

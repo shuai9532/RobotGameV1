@@ -1,10 +1,6 @@
 package com.company;
 
-import com.company.action.ActionProcess;
-import com.company.action.RobotGameInputParser;
-import com.company.data.RobotState;
-import com.company.data.RobotState.Direction;
-import com.company.data.Action;
+import com.company.RobotState.Direction;
 import java.util.List;
 
 public class Main {
@@ -29,24 +25,26 @@ public class Main {
     RobotGameInputParser parser = new RobotGameInputParser();
 
     int[] location = parser.readInitialLocation(System.in);
-    while(location == null){
+    while (location == null) {
       System.err.println("the input location is not valid.");
       System.err.println("the location is composed of x and y; start with [ and end with ] \n"
           + "sample input :[2,3]");
       System.err.println("Please re-input:");
       location = parser.readInitialLocation(System.in);
+
     }
 
     Direction direction = parser.readInitialDirection(System.in);
-    while(direction == null){
+    while (direction == null) {
       System.err.println("the input direction is not valid.");
       System.err.println("direction faced: W, S, N, E");
       System.err.println("Please re-input:");
       direction = parser.readInitialDirection(System.in);
     }
+    RobotState state = new RobotState(location[0], location[1], direction);
 
     List<Action> actions = parser.readActions(System.in);
-    while(actions == null){
+    while (actions == null) {
       System.err.println("the input actions contain invalid step or teh formatt is wrong.");
       System.err.println("the actions are limited to:\n"
           + "M: Move 1 square forward\n"
@@ -57,8 +55,21 @@ public class Main {
       actions = parser.readActions(System.in);
     }
 
-    ActionProcess processor = new ActionProcess(
-        new RobotState(location[0], location[1],direction), actions);
-    processor.processAction();
+    boolean endNormally = true;
+    for (Action action : actions) {
+      if (!action.execute(state, new SquareBoard(8))) {
+        System.out.println("the robot at the boundary");
+        System.out.println(
+            String.format("the final location:[%s,%s]", state.getX(), state.getY()));
+        System.out.println("the direction faced: " + state.getDirection());
+        endNormally = false;
+        break;
+      }
+    }
+    if(endNormally){
+      System.out.println(
+          String.format("the final location:[%s,%s]", state.getX(), state.getY()));
+      System.out.println("the direction faced: " + state.getDirection());
+    }
   }
 }

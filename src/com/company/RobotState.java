@@ -1,7 +1,4 @@
-package com.company.data;
-
-
-import java.util.Dictionary;
+package com.company;
 
 /**
  * Created by shuai9532 on 4/16/17.
@@ -34,7 +31,5 @@ public class RobotState {
   public Direction getDirection() {return direction;}
 
   public void setDirection(Direction direction) {this.direction = direction;}
-
-
 
 }

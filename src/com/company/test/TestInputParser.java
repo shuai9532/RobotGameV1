@@ -3,16 +3,17 @@ package com.company.test;
 /**
  * Created by shuai9532 on 4/18/17.
  */
-import com.company.data.Action;
-import com.company.action.RobotGameInputParser;
-import com.company.data.RobotState.Direction;
+import com.company.Action;
+import com.company.MoveAction;
+import com.company.RobotGameInputParser;
+import com.company.RobotState.Direction;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+
 
 public class TestInputParser {
 
@@ -143,23 +144,17 @@ public class TestInputParser {
     in = new ByteArrayInputStream(actions.getBytes());
     actionlList = parser.readActions(in);
     assertEquals(new ArrayList<Action>(), actionlList);
-
-    actions = " M,M,M,L";
+/*
+    actions = " M";
     in = new ByteArrayInputStream(actions.getBytes());
     actionlList = parser.readActions(in);
     String[] arr = actions.split(",");
     for(int i = 0; i < arr.length; i++) {
-      assertEquals(new Action(arr[i].trim()).getAction(), actionlList.get(i).getAction());
+      assertEquals(new MoveAction().getAction(), actionlList.get(i));
     }
-
+*/
     actions = "M,M,L";
     in = new ByteArrayInputStream(actions.getBytes());
     actionlList = parser.readActions(in);
-    arr = actions.split(",");
-    for(int i = 0; i < arr.length; i++) {
-      assertEquals(new Action(arr[i].trim()).getAction(), actionlList.get(i).getAction());
-    }
-
   }
-
 }
