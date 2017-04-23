@@ -1,6 +1,7 @@
 package com.company;
 
-import com.company.RobotState.Direction;
+import com.company.action.Action;
+import com.company.data.RobotState.Direction;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,12 @@ import java.util.Scanner;
  */
 public class RobotGameInputParser {
 
-
+  private final int MIN_LOCATION_STRING_LENGTH = 5;
+  /**
+   * Form a 2-D array location
+   * @param stream In this program, it is System.in
+   * @return 2-D array where x at index 0 and y at index 1
+   */
   public int[] readInitialLocation(InputStream stream){
     Scanner in = new Scanner(stream);
     in.useDelimiter("\n");
@@ -18,16 +24,22 @@ public class RobotGameInputParser {
 
     if(in.hasNext()) {
       String loc = in.next();
-      int[] result = convertLocation(loc);
-      return result;
+      return convertLocation(loc);
     }
     return null;
   }
 
+  /**
+   * 2D array formation helpler
+   * @param location The string form of location
+   * @return 2D array that represents the location
+   */
   private int[] convertLocation(String location){
 
-    if(location.equals("") || location == null || location.length() < 5) return null;
-    if(!(location.charAt(0) == '[' && location.charAt(location.length()-1) == ']')) return null;
+    if(location.equals("") || location == null || location.length() < MIN_LOCATION_STRING_LENGTH)
+      return null;
+    if(!(location.charAt(0) == '[' && location.charAt(location.length()-1) == ']'))
+      return null;
 
     int[] arr = new int[2];
     String subString = location.substring(1,location.length()-1);
@@ -47,6 +59,11 @@ public class RobotGameInputParser {
     return arr;
   }
 
+  /**
+   * Form the direction
+   * @param stream In this program, it is System.in
+   * @return Direction
+   */
   public Direction readInitialDirection(InputStream stream) {
     Scanner in = new Scanner(stream);
     in.useDelimiter("\n");
@@ -69,6 +86,11 @@ public class RobotGameInputParser {
     return null;
   }
 
+  /**
+   * Make a list of action objects
+   * @param stream In this program, it is System.in
+   * @return A list that contains action objects
+   */
   public List<Action> readActions(InputStream stream){
     Scanner in = new Scanner(stream);
     List<Action> actions = new ArrayList<>();
@@ -86,7 +108,6 @@ public class RobotGameInputParser {
       if(!(trimmedAction.equals("M") || trimmedAction.equals("L")|| trimmedAction.equals("R"))){
         return null;
       }
-      System.out.println("Action: "+ trimmedAction);
       actions.add(factory.createAction(trimmedAction));
     }
     return actions;
