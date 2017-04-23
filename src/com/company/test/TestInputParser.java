@@ -3,10 +3,9 @@ package com.company.test;
 /**
  * Created by shuai9532 on 4/18/17.
  */
-import com.company.Action;
-import com.company.MoveAction;
+import com.company.action.Action;
 import com.company.RobotGameInputParser;
-import com.company.RobotState.Direction;
+import com.company.data.RobotState.Direction;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
