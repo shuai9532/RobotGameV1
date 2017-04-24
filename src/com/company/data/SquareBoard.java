@@ -5,10 +5,12 @@ package com.company.data;
  */
 public class SquareBoard implements Board {
 
-  public static int[][] board;
+  private int length;
+  private int width;
 
-  public SquareBoard(int size){
-    board =  new int[size][size];
+  public SquareBoard(int length, int width ){
+    this.length = length;
+    this.width = width;
   }
 
   /**
@@ -19,6 +21,6 @@ public class SquareBoard implements Board {
    */
   @Override
   public boolean canMoveToPosition(int x, int y) {
-    return (x <= board[0].length && x >= 1 && y <= board.length && y >= 1);
+    return (x <= this.length && x >= 1 && y <= this.width && y >= 1);
   }
 }

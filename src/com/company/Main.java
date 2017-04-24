@@ -26,13 +26,13 @@ public class Main {
         + "Direction faced: N\n"
         + "Actions: M,M,M,L,M,R,R,R");
 
-    SquareBoard board =  new SquareBoard(8);
+    SquareBoard board =  new SquareBoard(8,8);
     RobotGameInputParser parser = new RobotGameInputParser();
     // Receive location
     System.out.println("Location:");
     int[] location = parser.readInitialLocation(System.in);
-    while (location == null || ((location[0] > board.board[0].length || location[0] < 1)
-        || (location[1] > board.board.length || location[1] < 1)))
+    while (location == null || ((location[0] > 8 || location[0] < 1)
+        || (location[1] > 8 || location[1] < 1)))
     {
       System.err.println("the input location is not valid.");
       System.err.println("the location is composed of x and y; start with [ and end with ] \n"
