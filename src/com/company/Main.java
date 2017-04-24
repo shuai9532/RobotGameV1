@@ -26,7 +26,7 @@ public class Main {
         + "Direction faced: N\n"
         + "Actions: M,M,M,L,M,R,R,R");
 
-    SquareBoard board =  new SquareBoard(8,8);
+    SquareBoard board =  new SquareBoard(8);
     RobotGameInputParser parser = new RobotGameInputParser();
     // Receive location
     System.out.println("Location:");
