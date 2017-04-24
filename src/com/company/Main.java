@@ -28,29 +28,30 @@ public class Main {
 
     SquareBoard board =  new SquareBoard(8);
     RobotGameInputParser parser = new RobotGameInputParser();
+
     // Receive location
-    System.out.println("Location:");
-    int[] location = parser.readInitialLocation(System.in);
-    while (location == null || !board.canMoveToPosition(location[0],location[1]))
-    {
-      System.err.println("the input location is not valid.");
-      System.err.println("the location is composed of x and y; start with [ and end with ] \n"
-          + "the range for x and y is 1 to 8\n"
-          + "sample input :[2,3]");
-      System.err.println("Please re-input:");
-      location = parser.readInitialLocation(System.in);
-    }
+    int[] location = getInitialLocation(board, parser);
     // Receive direction
-    System.out.println("Direction faced:");
-    Direction direction = parser.readInitialDirection(System.in);
-    while (direction == null) {
-      System.err.println("the input direction is not valid.");
-      System.err.println("direction faced: W, S, N, E");
-      System.err.println("Please re-input:");
-      direction = parser.readInitialDirection(System.in);
-    }
+    Direction direction = getInitialDirection(parser);
+    // Form the initial state of the robot
     RobotState state = new RobotState(location[0], location[1], direction);
     // Receive a list of actions
+    List<Action> actions = getActions(parser);
+
+    // Process actions
+    for (Action action : actions) {
+      if (!action.execute(state,board)) {
+        System.out.println("The robot reaches the boundary");
+        break;
+      }
+    }
+    System.out.println(String.format("The final location:[%s,%s]", state.getX(), state.getY()));
+    System.out.println("The direction faced: " + state.getDirection());
+
+  }
+
+  private static List<Action> getActions(RobotGameInputParser parser) {
+
     System.out.println("Actions:");
     ActionFactory factory = new ActionFactory();
     List<Action> actions = parser.readActions(System.in, factory);
@@ -64,23 +65,36 @@ public class Main {
       System.err.println("Please re-input: ");
       actions = parser.readActions(System.in, factory);
     }
-    // Process actions
-    boolean endNormally = true;
-    for (Action action : actions) {
-      if (!action.execute(state,board)) {
-        System.out.println("The robot reaches the boundary");
-        System.out.println(
-            String.format("The final location:[%s,%s]", state.getX(), state.getY()));
-        System.out.println("The direction faced: " + state.getDirection());
-        endNormally = false;
-        break;
-      }
+    return actions;
+  }
+
+  private static Direction getInitialDirection(RobotGameInputParser parser) {
+
+    System.out.println("Direction faced:");
+    Direction direction = parser.readInitialDirection(System.in);
+    while (direction == null) {
+      System.err.println("the input direction is not valid.");
+      System.err.println("direction faced: W, S, N, E");
+      System.err.println("Please re-input:");
+      direction = parser.readInitialDirection(System.in);
     }
-    if(endNormally){
-      System.out.println(
-          String.format("The final location:[%s,%s]", state.getX(), state.getY()));
-      System.out.println("The direction faced: " + state.getDirection());
+    return direction;
+  }
+
+  private static int[] getInitialLocation(SquareBoard board, RobotGameInputParser parser) {
+
+    System.out.println("Location:");
+    int[] location = parser.readInitialLocation(System.in);
+    while (location == null || !board.canMoveToPosition(location[0],location[1]))
+    {
+      System.err.println("the input location is not valid.");
+      System.err.println("the location is composed of x and y; start with [ and end with ] \n"
+          + "the range for x and y is 1 to 8\n"
+          + "sample input :[2,3]");
+      System.err.println("Please re-input:");
+      location = parser.readInitialLocation(System.in);
     }
+    return location;
   }
 
 }

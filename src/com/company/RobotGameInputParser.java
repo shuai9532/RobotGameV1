@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class RobotGameInputParser {
 
   private final int MIN_LOCATION_STRING_LENGTH = 5;
+
   /**
    * Form a 2-D array location
    * @param stream In this program, it is System.in
@@ -28,11 +29,6 @@ public class RobotGameInputParser {
     return null;
   }
 
-  /**
-   * 2D array formation helpler
-   * @param location The string form of location
-   * @return 2D array that represents the location
-   */
   private int[] convertLocation(String location){
 
     if(location.equals("") || location == null || location.length() < MIN_LOCATION_STRING_LENGTH)
