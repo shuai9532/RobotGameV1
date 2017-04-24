@@ -1,11 +1,20 @@
 package com.company.action;
 
-import com.company.data.SquareBoard;
+import com.company.data.Board;
 import com.company.data.RobotState;
 /**
  * Created by shuai9532 on 4/22/17.
  */
 public class MoveAction implements Action {
+
+  // singleton design pattern
+  private static final MoveAction SINGLETON = new MoveAction();
+
+  private MoveAction(){}
+
+  public static MoveAction getInstance() {
+    return SINGLETON;
+  }
 
   /**
    * Move the robot one step further
@@ -14,7 +23,7 @@ public class MoveAction implements Action {
    * @return True if the robot makes a move
    */
   @Override
-  public boolean execute(RobotState currentState, SquareBoard board) {
+  public boolean execute(RobotState currentState, Board board) {
 
     int x = currentState.getX();
     int y = currentState.getY();

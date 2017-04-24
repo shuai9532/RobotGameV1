@@ -31,9 +31,8 @@ public class Main {
     // Receive location
     System.out.println("Location:");
     int[] location = parser.readInitialLocation(System.in);
-    while (location == null || ((location[0] > board.board[0].length
-           || location[0] < 1) && (location[1] > board.board.length
-           || location[1] < 1)))
+    while (location == null || ((location[0] > board.board[0].length || location[0] < 1)
+        || (location[1] > board.board.length || location[1] < 1)))
     {
       System.err.println("the input location is not valid.");
       System.err.println("the location is composed of x and y; start with [ and end with ] \n"
@@ -54,7 +53,8 @@ public class Main {
     RobotState state = new RobotState(location[0], location[1], direction);
     // Receive a list of actions
     System.out.println("Actions:");
-    List<Action> actions = parser.readActions(System.in);
+    ActionFactory factory = new ActionFactory();
+    List<Action> actions = parser.readActions(System.in, factory);
     while (actions == null) {
       System.err.println("the input actions contain invalid step or the inout form is wrong.");
       System.err.println("the actions are limited to:\n"
@@ -63,7 +63,7 @@ public class Main {
           + "R: Turn right");
       System.err.println("The format is : M,M,M,L,M,R,R,R");
       System.err.println("Please re-input: ");
-      actions = parser.readActions(System.in);
+      actions = parser.readActions(System.in, factory);
     }
     // Process actions
     boolean endNormally = true;

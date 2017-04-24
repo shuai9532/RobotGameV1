@@ -89,11 +89,10 @@ public class RobotGameInputParser {
    * @param stream In this program, it is System.in
    * @return A list that contains action objects
    */
-  public List<Action> readActions(InputStream stream){
+  public List<Action> readActions(InputStream stream, ActionFactory factory){
 
     Scanner in = new Scanner(stream);
     List<Action> actions = new ArrayList<>();
-    ActionFactory factory = new ActionFactory();
     in.useDelimiter("\n");
     if(!in.hasNext()){
       return actions;

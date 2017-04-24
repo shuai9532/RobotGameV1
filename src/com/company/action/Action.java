@@ -1,6 +1,6 @@
 package com.company.action;
 
-import com.company.data.SquareBoard;
+import com.company.data.Board;
 import com.company.data.RobotState;
 /**
  * Created by shuai9532 on 4/22/17.
@@ -14,6 +14,6 @@ public interface Action {
    * @param board The board that robot is moving
    * @return True if the robot successfully makes a movement or takes a turn
    */
-  public boolean execute(RobotState currentState, SquareBoard board);
+  public boolean execute(RobotState currentState, Board board);
 
 }

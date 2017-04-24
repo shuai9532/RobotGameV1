@@ -2,8 +2,10 @@ package com.company;
 
 import com.company.action.Action;
 import com.company.action.MoveAction;
-import com.company.action.TurnLeft;
-import com.company.action.TurnRight;
+import com.company.action.TurnLeftAction;
+import com.company.action.TurnLeftAction;
+import com.company.action.TurnRightAction;
+import com.company.action.TurnRightAction;
 
 /**
  * Created by shuai9532 on 4/22/17.
@@ -19,11 +21,11 @@ public class ActionFactory {
 
     switch (action) {
       case "M":
-        return new MoveAction();
+        return MoveAction.getInstance();
       case "L":
-        return new TurnLeft();
+        return TurnLeftAction.getInstance();
       case "R":
-        return new TurnRight();
+        return TurnRightAction.getInstance();
       default:
         return null;
     }

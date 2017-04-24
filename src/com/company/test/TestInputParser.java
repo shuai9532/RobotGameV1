@@ -3,6 +3,7 @@ package com.company.test;
 /**
  * Created by shuai9532 on 4/18/17.
  */
+import com.company.ActionFactory;
 import com.company.action.Action;
 import com.company.RobotGameInputParser;
 import com.company.data.RobotState.Direction;
@@ -124,24 +125,25 @@ public class TestInputParser {
 
   @Test
   public void testInputActions(){
+    ActionFactory factory= new ActionFactory();
     String actions = "1,4,M,M,L";
     InputStream in = new ByteArrayInputStream(actions.getBytes());
-    List<Action> actionlList = parser.readActions(in);
+    List<Action> actionlList = parser.readActions(in, factory);
     assertEquals(null, actionlList);
 
     actions = "l,S,M,M,L";
     in = new ByteArrayInputStream(actions.getBytes());
-    actionlList = parser.readActions(in);
+    actionlList = parser.readActions(in, factory);
     assertEquals(null, actionlList);
 
     actions = " ,M,M,L";
     in = new ByteArrayInputStream(actions.getBytes());
-    actionlList = parser.readActions(in);
+    actionlList = parser.readActions(in, factory);
     assertEquals(null, actionlList);
 
     actions = "";
     in = new ByteArrayInputStream(actions.getBytes());
-    actionlList = parser.readActions(in);
+    actionlList = parser.readActions(in, factory);
     assertEquals(new ArrayList<Action>(), actionlList);
 /*
     actions = " M";
@@ -154,6 +156,6 @@ public class TestInputParser {
 */
     actions = "M,M,L";
     in = new ByteArrayInputStream(actions.getBytes());
-    actionlList = parser.readActions(in);
+    actionlList = parser.readActions(in, factory);
   }
 }

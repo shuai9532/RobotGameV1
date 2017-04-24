@@ -1,13 +1,21 @@
 package com.company.action;
 
-import com.company.data.SquareBoard;
+import com.company.data.Board;
 import com.company.data.RobotState;
 import com.company.data.RobotState.Direction;
 /**
  * Created by shuai9532 on 4/22/17.
  */
-public class TurnRight implements Action {
+public class TurnRightAction implements Action {
 
+  // singleton design pattern
+  private static final TurnRightAction SINGLETON = new TurnRightAction();
+
+  private TurnRightAction(){}
+
+  public static TurnRightAction getInstance() {
+    return SINGLETON;
+  }
   /**
    * Make robot turn right
    * @param currentState Current location and direction of the robot
@@ -15,7 +23,7 @@ public class TurnRight implements Action {
    * @return True if the robot takes a turn successfully
    */
   @Override
-  public boolean execute(RobotState currentState, SquareBoard board) {
+  public boolean execute(RobotState currentState, Board board) {
 
     switch (currentState.getDirection()) {
       case N:
