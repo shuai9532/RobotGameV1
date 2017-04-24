@@ -56,13 +56,13 @@ public class Main {
     ActionFactory factory = new ActionFactory();
     List<Action> actions = parser.readActions(System.in, factory);
     while (actions == null) {
-      System.err.println("the input actions contain invalid step or the inout form is wrong.");
-      System.err.println("the actions are limited to:\n"
+      System.out.println("the input actions contain invalid step or the inout form is wrong.");
+      System.out.println("the actions are limited to:\n"
           + "M: Move 1 square forward\n"
           + "L: Turn left\n"
           + "R: Turn right");
-      System.err.println("The format is : M,M,M,L,M,R,R,R");
-      System.err.println("Please re-input: ");
+      System.out.println("The format is : M,M,M,L,M,R,R,R");
+      System.out.println("Please re-input: ");
       actions = parser.readActions(System.in, factory);
     }
     return actions;
@@ -73,9 +73,9 @@ public class Main {
     System.out.println("Direction faced:");
     Direction direction = parser.readInitialDirection(System.in);
     while (direction == null) {
-      System.err.println("the input direction is not valid.");
-      System.err.println("direction faced: W, S, N, E");
-      System.err.println("Please re-input:");
+      System.out.println("the input direction is not valid.");
+      System.out.println("direction faced: W, S, N, E");
+      System.out.println("Please re-input:");
       direction = parser.readInitialDirection(System.in);
     }
     return direction;
@@ -87,11 +87,11 @@ public class Main {
     int[] location = parser.readInitialLocation(System.in);
     while (location == null || !board.canMoveToPosition(location[0],location[1]))
     {
-      System.err.println("the input location is not valid.");
-      System.err.println("the location is composed of x and y; start with [ and end with ] \n"
+      System.out.println("the input location is not valid.");
+      System.out.println("the location is composed of x and y; start with [ and end with ] \n"
           + "the range for x and y is 1 to 8\n"
           + "sample input :[2,3]");
-      System.err.println("Please re-input:");
+      System.out.println("Please re-input:");
       location = parser.readInitialLocation(System.in);
     }
     return location;

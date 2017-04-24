@@ -13,9 +13,7 @@ public class RobotState {
 
     location[0] = X_axis;
     location[1] = Y_axis;
-    if( direction == Direction.E || direction == Direction.W ||
-        direction == Direction.S || direction == Direction.N )
-      this.direction = direction;
+    this.direction = direction;
   }
 
   /**
