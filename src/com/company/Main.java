@@ -56,7 +56,7 @@ public class Main {
     ActionFactory factory = new ActionFactory();
     List<Action> actions = parser.readActions(System.in, factory);
     while (actions == null) {
-      System.out.println("the input actions contain invalid step or the inout form is wrong.");
+      System.out.println("the input actions contain invalid step or the input form is wrong.");
       System.out.println("the actions are limited to:\n"
           + "M: Move 1 square forward\n"
           + "L: Turn left\n"
@@ -85,8 +85,7 @@ public class Main {
 
     System.out.println("Location:");
     int[] location = parser.readInitialLocation(System.in);
-    while (location == null || !board.canMoveToPosition(location[0],location[1]))
-    {
+    while (location == null || !board.canMoveToPosition(location[0],location[1])) {
       System.out.println("the input location is not valid.");
       System.out.println("the location is composed of x and y; start with [ and end with ] \n"
           + "the range for x and y is 1 to 8\n"

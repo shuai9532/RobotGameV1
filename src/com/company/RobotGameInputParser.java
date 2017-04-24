@@ -95,11 +95,11 @@ public class RobotGameInputParser {
     }
     String[] actions_string = in.next().split(",");
     for(String action : actions_string){
-      String trimmedAction = action.trim();
-      if(!(trimmedAction.equals("M") || trimmedAction.equals("L")|| trimmedAction.equals("R"))){
+      Action newAction = factory.createAction(action.trim());
+      if(newAction == null){
         return null;
       }
-      actions.add(factory.createAction(trimmedAction));
+      actions.add(newAction);
     }
     return actions;
   }
