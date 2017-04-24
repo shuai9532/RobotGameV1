@@ -31,8 +31,7 @@ public class Main {
     // Receive location
     System.out.println("Location:");
     int[] location = parser.readInitialLocation(System.in);
-    while (location == null || ((location[0] > 8 || location[0] < 1)
-        || (location[1] > 8 || location[1] < 1)))
+    while (location == null || !board.canMoveToPosition(location[0],location[1]))
     {
       System.err.println("the input location is not valid.");
       System.err.println("the location is composed of x and y; start with [ and end with ] \n"
